@@ -69,6 +69,11 @@
       outline: none;
     }
 
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
     button {
       display: block;
       width: 100%;
@@ -96,17 +101,17 @@
       <input type="hidden" name="orgid" value="00DgL000004CcMz">
       <input type="hidden" name="retURL" value="https://www.google.com">
 
-      <label for="bookingId">Booking Number:</label>
-      <input id="bookingId" name="00NgL00000z47as" type="text" required>
+      <label for="00NgL00000z47as">Booking Number:</label>
+      <input id="00NgL00000z47as" name="00NgL00000z47as" type="text" maxlength="100" required>
 
-      <label for="customerName">Customer Name:</label>
-      <input id="customerName" name="00NgL00000z46aF" type="text" required>
+      <label for="00NgL00000z46aF">Customer Name:</label>
+      <input id="00NgL00000z46aF" name="00NgL00000z46aF" type="text" maxlength="100" required>
 
-      <label for="customerFeedback">Customer Feedback:</label>
-      <textarea id="customerFeedback" name="00NgL00000zGovN" rows="4" required></textarea>
+      <label for="00NgL00000zGovN">Customer Feedback:</label>
+      <textarea id="00NgL00000zGovN" name="00NgL00000zGovN" rows="4" required></textarea>
 
-      <label for="customerRating">Customer Rating:</label>
-      <select id="customerRating" name="00NgL00000zGp1p" required>
+      <label for="00NgL00000zGp1p">Customer Rating:</label>
+      <select id="00NgL00000zGp1p" name="00NgL00000zGp1p" required>
         <option value="">-- None --</option>
         <option value="Excellent">Excellent</option>
         <option value="Good">Good</option>
@@ -119,12 +124,12 @@
   </div>
 
   <script>
-    // Optional: Confirmation alert before redirect
-    document.getElementById('feedbackForm').addEventListener('submit', function() {
-      setTimeout(function() {
-        window.location.href = 'https://www.google.com';
-      }, 1000); // Adjust delay as needed
-    });
+    // Auto-fill Booking Number from URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const bookingNumber = params.get("booking");
+    if (bookingNumber) {
+      document.getElementById("00NgL00000z47as").value = bookingNumber;
+    }
   </script>
 </body>
 </html>
