@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hotel Feedback Form</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Customer Feedback Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #eef2f3, #8e9eab);
+      background: linear-gradient(to right, #d7d2cc, #304352);
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      animation: fadeIn 1.5s ease-in;
+      animation: fadeIn 1s ease-in;
     }
 
     @keyframes fadeIn {
@@ -23,13 +22,13 @@
     }
 
     .container {
-      background: white;
-      padding: 40px;
+      background: #fff;
+      padding: 30px 40px;
       border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      width: 100%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       max-width: 500px;
-      animation: fadeInUp 1s ease-out;
+      width: 90%;
+      animation: fadeInUp 1s ease-in;
     }
 
     @keyframes fadeInUp {
@@ -38,40 +37,45 @@
     }
 
     h2 {
-      color: #2a3f54;
+      text-align: center;
+      color: #2c3e50;
       margin-bottom: 20px;
-      font-weight: 600;
     }
 
     label {
-      font-weight: 600;
       display: block;
-      margin-bottom: 8px;
-      margin-top: 20px;
+      margin-top: 15px;
+      font-weight: 600;
       color: #333;
     }
 
     input[type="text"],
-    select,
-    textarea {
+    textarea,
+    select {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 8px;
       box-sizing: border-box;
       font-size: 16px;
-      margin-top: 4px;
+      margin-top: 5px;
+      transition: border-color 0.3s ease;
     }
 
-    textarea {
-      resize: vertical;
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #3498db;
+      outline: none;
     }
 
     button {
-      margin-top: 30px;
-      background-color: #2a5298;
+      display: block;
+      width: 100%;
+      margin-top: 25px;
+      background-color: #3498db;
       color: white;
-      padding: 12px 25px;
+      padding: 12px;
       border: none;
       border-radius: 8px;
       font-size: 16px;
@@ -80,45 +84,47 @@
     }
 
     button:hover {
-      background-color: #1c3f7b;
-    }
-
-    .hidden {
-      display: none;
+      background-color: #2c80b4;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>We Value Your Feedback</h2>
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      
-      <!-- Hidden Booking ID (auto-filled from URL) -->
-      <input type="text" id="bookingId" name="Booking ID" class="hidden" required>
+    <h2>Customer Feedback Form</h2>
+    <form id="feedbackForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+      <!-- Hidden Salesforce fields -->
+      <input type="hidden" name="orgid" value="00DgL000004CcMz">
+      <input type="hidden" name="retURL" value="https://www.google.com">
 
-      <label for="rating">How would you rate your stay?</label>
-      <select name="Rating" id="rating" required>
-        <option value="">-- Select Rating --</option>
-        <option value="Excellent">🌟 Excellent</option>
-        <option value="Good">👍 Good</option>
-        <option value="Average">👌 Average</option>
-        <option value="Poor">👎 Poor</option>
+      <label for="bookingId">Booking Number:</label>
+      <input id="bookingId" name="00NgL00000z47as" type="text" required>
+
+      <label for="customerName">Customer Name:</label>
+      <input id="customerName" name="00NgL00000z46aF" type="text" required>
+
+      <label for="customerFeedback">Customer Feedback:</label>
+      <textarea id="customerFeedback" name="00NgL00000zGovN" rows="4" required></textarea>
+
+      <label for="customerRating">Customer Rating:</label>
+      <select id="customerRating" name="00NgL00000zGp1p" required>
+        <option value="">-- None --</option>
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Average">Average</option>
+        <option value="Poor">Poor</option>
       </select>
-
-      <label for="feedback">Share your feedback</label>
-      <textarea name="Feedback" id="feedback" rows="5" placeholder="Your thoughts..." required></textarea>
 
       <button type="submit">Submit Feedback</button>
     </form>
   </div>
 
   <script>
-    // Fill Booking ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const bookingId = urlParams.get('bookingId');
-    if (bookingId) {
-      document.getElementById("bookingId").value = bookingId;
-    }
+    // Optional: Confirmation alert before redirect
+    document.getElementById('feedbackForm').addEventListener('submit', function() {
+      setTimeout(function() {
+        window.location.href = 'https://www.google.com';
+      }, 1000); // Adjust delay as needed
+    });
   </script>
 </body>
 </html>
